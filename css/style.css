@@ -1,0 +1,201 @@
+.scafoldingDiv {
+  border: 1px solid black;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.message {
+  font-size: 16pt;
+  background-color: #f0f0f0;
+  text-align: center;
+  width: 450px;
+  margin: 20px auto 0;
+  padding: 5px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.forms {
+  margin: 0 auto;
+  width: 350px;
+}
+
+.colmerged {
+  padding: 10px 0 10px 0;
+  text-align: right;
+}
+
+.textMiddle {
+  text-align: center;
+}
+
+.textLeft {
+  text-align: left;
+}
+
+.textRight {
+  text-align: right;
+}
+
+.col1st {
+  text-align: right;
+}
+
+.col2st {
+  text-align: left;
+}
+
+.tableRowTitle {
+  font-weight: bold;
+}
+
+#topDiv {
+  text-align: center;
+  width: 780px;
+  min-height: 55px;
+}
+
+#headerMainDiv {
+  width: 575px;
+  float: left;
+  text-align: center;
+  padding-top: 5px;
+}
+
+#headerUserInfoDiv {
+  width: 200px;
+  float: right;
+  min-height: 55px;
+  border-left: 1px solid black;
+}
+
+#centerDiv {
+  width: 780px;
+}
+
+#mainContentDiv {
+  width: 100%;
+  min-height: 350px;
+}
+
+#innerContentDiv {
+  width: 200px;
+  height: 100px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 20pt;
+  position: relative;
+  top: 115px;
+}
+
+#footerDiv {
+  width: 780px;
+  height: 50px;
+  text-align: center;
+  clear: both;
+}
+
+.tableRowTitle {
+  font-weight: bold;
+}
+
+#loginFormWrapper {
+  width: 60%;
+  margin: 5% auto 0;
+}
+
+#loginFormWrapper table {
+  text-align: right;
+  margin: 0 auto;
+}
+
+#innerContent {
+  width: 200px;
+  height: 100px;
+  margin: 150px auto 0;
+}
+
+#searchFormDiv {
+  padding: 10px 0 10px 0;
+  width: 100%;
+  text-align: center;
+}
+
+#searchResultsDiv {
+  width: 100%;
+  border-top: 1px solid black;
+  margin-bottom: 15px;
+}
+
+#searchResultsDiv table {
+  margin: 10px auto 0;
+  border-collapse: collapse;
+}
+
+#searchResultsDiv table a {
+  text-decoration: none;
+}
+
+#searchResultsDiv table,
+#searchResultsDiv table td,
+#searchResultsDiv table th {
+  padding: 2px 4px 2px 4px;
+}
+
+#searchResultsDiv table td {
+  border: 1px solid black;
+}
+
+#searchResultsDiv table td:last-child {
+  text-align: center;
+}
+
+#bookDetailsDiv {
+  border: none;
+  margin: 15px 0 15px 0;
+}
+
+#bookDetailsDiv table {
+  width: 90%;
+  text-align: left;
+  margin: auto;
+  border-collapse: collapse;
+}
+
+#bookDetailsDiv table td {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+#basketDiv {
+  border: none;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+#basketDiv table {
+  width: 90%;
+  text-align: left;
+  margin: auto;
+  border-collapse: collapse;
+}
+
+#basketDiv table td,
+#basketDiv table th {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+#basketDiv {
+  border: none;
+}
+
+#orderNoLoginInfoDiv {
+  border: none;
+  margin-top: 10px;
+  font-size: 14pt;
+}
+
+#bookDetailsDiv table tr td:first-child {
+  width: 20%;
+}
