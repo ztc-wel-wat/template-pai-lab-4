@@ -56,7 +56,7 @@ class Registration{
    }
 
     // Sprawdzenie, czy podany e-mail jest już w bazie
-    $query = "SELECT COUNT(*) FROM Klienci WHERE Email=" . $fieldsFromForm['email'] . "'";
+    $query = "SELECT COUNT(*) FROM klienci WHERE Email=" . $fieldsFromForm['email'] . "'";
     if ($this->dbo->getQuerySingleResult($query) > 0) {
      unset($fieldsFromForm['haslo']);
      unset($fieldsFromForm['haslo2']);

@@ -121,9 +121,9 @@ class PortalFront extends Portal
       // Formowanie zapytania
       $query = 'SELECT k.`Tytul`, GROUP_CONCAT(a.`Nazwa`) AS `Autor`, '
       . 'k.`ISBN`, w.`Nazwa` AS `Wydawnictwo`, k.`Cena`, k.`Id` AS `Id` '
-      . 'FROM Ksiazki k JOIN Wydawnictwa w ON (k.WydawnictwoId = w.Id) '
-      . 'JOIN KsiazkiAutorzy ka ON (ka.`KsiazkaId` = k.`Id`) '
-      . 'JOIN Autorzy a ON (ka.`AutorId` = a.`Id`) WHERE 1=1 '
+      . 'FROM ksiazki k JOIN Wydawnictwa w ON (k.WydawnictwoId = w.Id) '
+      . 'JOIN ksiazkiautorzy ka ON (ka.`KsiazkaId` = k.`Id`) '
+      . 'JOIN autorzy a ON (ka.`AutorId` = a.`Id`) WHERE 1=1 '
       . $cond1 . $cond2 . 'GROUP BY k.`Id` ORDER BY `Autor`, `Tytul`, `Wydawnictwo`';
       // Wykonanie zapytania i sprawdzenie wyników
       $komunikat = false;
@@ -135,29 +135,50 @@ class PortalFront extends Portal
       include 'templates/searchResults.php';
      }
 
-     function showBookDetails() {
-      // Sprawdzenie poprawności identyfikatora książki (parametr id)
-      if (!isset($_GET['id']) || ($id = intval($_GET['id'])) < 1) {
+     function showBookDetails()
+  {
+    // Sprawdzenie poprawności identyfikatora książki (parametr id)
+    if (!isset($_GET['id']) || ($id = intval($_GET['id'])) < 1) {
       $komunikat = 'Brak książki o podanym identyfikatorze.';
-      } else { // Formowanie zapytania
+    } else { // Formowanie zapytania
       $query = 'SELECT `Tytul`, `ISBN`, `Rok wydania` AS Rok, `Opis`, `Cena`,'
-      . 'w.`Nazwa` AS `Wydawnictwo`, GROUP_CONCAT(a.`Nazwa`) AS Autor,'
-      . 'k.`Id` AS `Id` FROM Ksiazki k '
-      . 'JOIN KsiazkiAutorzy ka ON (k.`Id`=ka.`KsiazkaId` AND k.id=' . $id . ')'
-      . 'JOIN Autorzy a ON (a.`Id` = ka.`AutorId`) '
-      . 'JOIN Wydawnictwa w ON (w.`Id`=k.`WydawnictwoId`) GROUP BY k.`Id`';
+        . 'w.`Nazwa` AS `Wydawnictwo`, GROUP_CONCAT(a.`Nazwa`) AS Autor,'
+        . 'k.`Id` AS `Id` FROM ksiazki k '
+        . 'JOIN ksiazkiautorzy ka ON (k.`Id`=ka.`KsiazkaId` AND k.id=' . $id . ')'
+        . 'JOIN autorzy a ON (a.`Id` = ka.`AutorId`) '
+        . 'JOIN wydawnictwa w ON (w.`Id`=k.`WydawnictwoId`) GROUP BY k.`Id`';
       // Umieszczenie wyników zapytania w tabeli
       if ($result = $this->dbo->query($query)) {
-      if ($row = $result->fetch_assoc())
-      $komunikat = false;
-      else
-      $komunikat = 'Brak książki o podanym identyfikatorze.';
+        if ($row = $result->fetch_assoc())
+          $komunikat = false;
+        else
+          $komunikat = 'Brak książki o podanym identyfikatorze.';
       } else {
-      $komunikat = 'Błąd serwera. Dane szczegółowe nie są dostępne.';
+        $komunikat = 'Błąd serwera. Dane szczegółowe nie są dostępne.';
       }
-      }
-      include 'templates/bookDetails.php';
-     }
+    }
+    include 'templates/bookDetails.php';
+  }
+
+
+  function addToBasket()
+  {
+    $basket = new Basket($this->dbo);
+    return $basket->add();
+  }
+
+  function showBasket()
+  {
+    $basket = new Basket($this->dbo);
+    $basket->show('Zawartość koszyka', true);
+  }
+
+  function modifyBasket()
+  {
+    $basket = new Basket($this->dbo);
+    $basket->modify();
+  }
+     
      
 }
 ?>
