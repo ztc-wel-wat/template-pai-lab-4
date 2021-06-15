@@ -5,7 +5,7 @@ spl_autoload_register('classLoader');
 session_start();
 
 try {
-  $portal = new PortalFront("localhost", "root", "", "bookworm");
+  $portal = new PortalFront("localhost", "root", "", "bookworm");  
 
   $action = 'showMain';
   if (isset($_GET['action'])) {
