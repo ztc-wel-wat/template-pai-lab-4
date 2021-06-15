@@ -69,7 +69,7 @@
             header('Location:index.php?action=showBasket');
             break;
         case 'checkout':
-          //Wyświetlenie podsumowania zamówienia
+          $portal->checkout();
           break;
         case 'showSearchForm':
           $portal->showSearchForm();
