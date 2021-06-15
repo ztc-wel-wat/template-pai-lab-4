@@ -416,3 +416,10 @@ SELECT `Id`, `Imie`, `Nazwisko`, `Haslo` FROM Kliecni WHERE `Email`='$email'
 
 UPDATE klienci SET Email = "jankowalski@wat.edu.pl", Haslo = "haslo1234" WHERE Id = 1
 SELECT COUNT(*) FROM Klienci WHERE Email="adres";
+
+SELECT k.`Tytul`, GROUP_CONCAT(a.`Nazwa`) 
+AS `Autor`, 'k.`ISBN`, w.`Nazwa` AS `Wydawnictwo`, k.`Cena`, k.`Id` AS `Id` FROM Ksiazki k 
+JOIN Wydawnictwa w ON (k.WydawnictwoId = w.Id) 
+JOIN KsiazkiAutorzy ka ON (ka.`KsiazkaId` = k.`Id`) 
+JOIN Autorzy a ON (ka.`AutorId` = a.`Id`) 
+WHERE 1=1 $cond1 . $cond2 . GROUP BY k.`Id` ORDER BY `Autor`, `Tytul`, `Wydawnictwo`
