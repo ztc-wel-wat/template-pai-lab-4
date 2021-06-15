@@ -9,7 +9,6 @@ class PortalFront extends Portal
 		$this->zalogowany = $this->getActualUser();
 	}
 
-
 	function getActualUser()
 	{
 		//Treść meotdy getActualUser
