@@ -45,12 +45,6 @@
         case 'showRegistrationForm': // Wyświetlenie formularza wyszukiwania
           $portal->showRegistrationForm();
           break;
-        case 'showSearchForm':
-          //Wyświetlenie formularza rejestracyjnego
-          break;
-        case 'searchBook':
-          //Wyszukanie książki
-          break;
         case 'showBookDetails':
           //Wyświetlenie szczegółowych informacji o książce
           break;
@@ -59,6 +53,14 @@
           break;
         case 'checkout':
           //Wyświetlenie podsumowania zamówienia
+          break;
+        case 'showSearchForm':
+          $portal->showSearchForm();
+          break;
+        case 'searchBook':
+          // Wyszukanie książki
+          $portal->showSearchForm();
+          $portal->showSearchResult();
           break;
         case 'showMain':
         default:
