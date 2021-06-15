@@ -1,4 +1,6 @@
-<?php if (!isset($portal)) die(); ?>
+<?php if (!isset($portal)) {
+    die();
+} ?>
 <!DOCTYPE html>
 <html>
 
@@ -19,12 +21,12 @@
     </div>
     <div id="headerUserInfoDiv">
       <?php if ($portal->zalogowany) : ?>
-        <div>Jesteś zalogowany jako: <?= $portal->zalogowany->nazwa ?></div>
+        <div>Jesteś zalogowany jako: <?= $portal->zalogowany->nazwa; ?></div>
         <div><a href="index.php?action=logout">Wylogowanie</a></div>
       <?php else : ?>
         <div>Nie jesteś zalogowany.</div>
         <div><a href="index.php?action=showLoginForm">Logowanie</a></div>
-      <?php endif ?>
+      <?php endif; ?>
     </div>
   </div>
 
@@ -37,8 +39,8 @@
 
       <?php
       switch ($action):
-        case 'showLoginForm':
-          //Wyświetlenie formularza logowania
+        case 'showLoginForm': // Wyświetlenie formularza logowania
+          include 'templates/loginForm.php';
           break;
         case 'showRegistrationForm':
           //Wyświetlenie formularza wyszukiwania
