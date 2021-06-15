@@ -5,5 +5,6 @@
  Autor:<input size="25" type="text" name="autor" value="<?php echo $autor; ?>">
  Autor:<input size="25" type="text" name="tytul" value="<?php echo $tytul; ?>">
  <input type="submit" value="Szukaj">
+ 
  </form>
 </div>
