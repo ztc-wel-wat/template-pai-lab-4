@@ -24,6 +24,15 @@ class PortalFront extends Portal
     //Treść meotdy getMessage
   }
 
+  function showRegistrationForm(){
+    $reg = new Registration($this->dbo);
+    return $reg->showRegistrationForm();
+  }
+  function registerUser(){
+    $reg = new Registration($this->dbo);
+    return $reg->registerUser();
+  }
+
   function login()
   {
     // Sprawdzenie czy ustanowiono połączenie z DB
