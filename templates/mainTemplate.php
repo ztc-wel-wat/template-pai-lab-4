@@ -51,7 +51,7 @@
           $portal->showSearchResults();
           break;
         case 'showBookDetails':
-          //Wyświetlenie szczegółowych informacji o książce
+          $portal->showBookDetails();
           break;
         case 'showBasket':
           //Wyświetlenie zawartości koszyka
