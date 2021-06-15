@@ -17,11 +17,12 @@ try {
     $komunikat = 'Wprowadź nazwę i hasło użytkownika';
   }
 
-  if ($action == 'showLoginForm' && $portal->zalogowany) {
+  if (($action == 'showLoginForm' || $action == 'showRegistrationForm' || $action == 'registerUser')
+    && $portal->zalogowany) {
     $portal->setMessage("Najpierw proszę się wylogować");
-    header("location:index.php?action=showMain");
+    header("Location:index.php?action=showMain");
     return;
-  }
+}
 
   switch ($action) {
     case 'login':
