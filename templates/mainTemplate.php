@@ -37,24 +37,29 @@
 
       <?php
       switch ($action):
-        case 'showLoginForm':
-          //Wyświetlenie formularza logowania
+        case 'showLoginForm': // Wyświetlenie formularza logowania
+             include('templates/loginForm.php');
+        break;
+         
+        case 'showRegistrationForm': // Wyświetlenie formularza wyszukiwania
+            $portal->showRegistrationForm();
           break;
-        case 'showRegistrationForm':
-          //Wyświetlenie formularza wyszukiwania
-          break;
-        case 'showSearchForm':
-          //Wyświetlenie formularza rejestracyjnego
-          break;
-        case 'searchBook':
-          //Wyszukanie książki
-          break;
-        case 'showBookDetails':
-          //Wyświetlenie szczegółowych informacji o książce
-          break;
-        case 'showBasket':
-          //Wyświetlenie zawartości koszyka
-          break;
+         
+          case 'showSearchForm': // Wyświetlenie formularza rejestracyjnego
+            $portal->showSearchForm();
+            break;
+           
+            case 'searchBook': // Wyszukanie książki
+              $portal->showSearchForm();
+              $portal->showSearchResult();
+              break;
+             
+              case 'showBookDetails': // Wyświetlenie szczegółowych informacji o książce
+                $portal->showBookDetails();
+                break;
+                case 'showBasket': // Wyświetlenie zawartości koszyka
+                  $portal->showBasket();
+                  break;
         case 'checkout':
           //Wyświetlenie podsumowania zamówienia
           break;
