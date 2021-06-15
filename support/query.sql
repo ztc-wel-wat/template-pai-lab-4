@@ -436,5 +436,9 @@ VALUES (1, 1, 1, 29.90),
 INSERT INTO AutorzyPseudonimy
 VALUES (5, 2);
 
----------------------------
+--------------------------- 4.3
+
+UPDATE `klienci` SET `Haslo` = 'aaaaaa' WHERE `klienci`.`Id` = 1;
+UPDATE `klienci` SET `Email` = 'a@a.pl' WHERE `klienci`.`Id` = 1;
+
 
