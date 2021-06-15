@@ -7,6 +7,7 @@ class PortalFront extends Portal
     $this->dbo = $this->initDB($host, $user, $pass, $db);
     $this->zalogowany = $this->getActualUser();
   }
+  
   function getActualUser()
   {
     if (isset($_SESSION['zalogowany']))
@@ -14,10 +15,12 @@ class PortalFront extends Portal
     else
       return null;
   }
+
   function setMessage($komunikat)
   {
     $_SESSION['komunikat'] = $komunikat;
   }
+
   function getMessage()
   {
     if (isset($_SESSION['komunikat'])) {
@@ -27,6 +30,7 @@ class PortalFront extends Portal
     } else
       return null;
   }
+
   function login()
   {
     // Sprawdzenie czy ustanowiono połączenie z DB
@@ -72,7 +76,6 @@ class PortalFront extends Portal
     }
   }
 
-
   function logout()
   {
     if (isset($_SESSION['zalogowany'])) {
@@ -82,6 +85,16 @@ class PortalFront extends Portal
     session_destroy();
   }
 
-
   //Tutaj pozostałe metody klasy
+  function showRegistrationForm()
+	{
+		$reg = new Registration($this->dbo);
+		return $reg->showRegistrationForm();
+	}
+
+	function registerUser()
+	{
+		$reg = new Registration($this->dbo);
+		return $reg->registerUser();
+	}
 }
