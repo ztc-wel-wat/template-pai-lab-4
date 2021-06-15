@@ -157,6 +157,18 @@ class PortalFront extends Portal {
       include 'templates/bookDetails.php';
      }
      
+     function addToBasket() {
+      $basket = new Basket($this->dbo);
+      return $basket->add();
+     }
+     function showBasket() {
+        $basket = new Basket($this->dbo);
+        $basket->show('Zawartość koszyka', true);
+     }
+     function modifyBasket() {
+        $basket = new Basket($this->dbo);
+        $basket->modify();
+     }
    
   
   //Tutaj pozostałe metody klasy
