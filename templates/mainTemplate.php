@@ -38,7 +38,7 @@
       <?php
       switch ($action):
         case 'showLoginForm':
-          //Wyświetlenie formularza logowania
+          include('templates/loginForm.php');
           break;
         case 'showRegistrationForm':
           //Wyświetlenie formularza wyszukiwania
