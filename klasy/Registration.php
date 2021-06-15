@@ -20,10 +20,11 @@ class Registration{
     $this->fields['kod'] = new FormInput('kod', 'Kod pocztowy');
     $this->fields['kraj'] = new FormInput('kraj', 'Kraj');
    }
-   public function showRegistrationForm() {
+ public function showRegistrationForm() {
     $formData = $this->fields;
     include 'templates/registrationForm.php';
    }
+   
    public function registerUser() {
     // Sprawdzenie czy wszystkie pola ustawione
     foreach ($this->fields as $name => $val) {
