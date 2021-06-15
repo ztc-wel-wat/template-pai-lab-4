@@ -1,4 +1,6 @@
-<?php if (!isset($portal)) die(); ?>
+<?php if (!isset($portal)) {
+    die();
+} ?>
 <!DOCTYPE html>
 <html>
 
@@ -19,12 +21,12 @@
     </div>
     <div id="headerUserInfoDiv">
       <?php if ($portal->zalogowany) : ?>
-        <div>Jesteś zalogowany jako: <?= $portal->zalogowany->nazwa ?></div>
+        <div>Jesteś zalogowany jako: <?= $portal->zalogowany->nazwa; ?></div>
         <div><a href="index.php?action=logout">Wylogowanie</a></div>
       <?php else : ?>
         <div>Nie jesteś zalogowany.</div>
         <div><a href="index.php?action=showLoginForm">Logowanie</a></div>
-      <?php endif ?>
+      <?php endif; ?>
     </div>
   </div>
 
@@ -37,26 +39,45 @@
 
       <?php
       switch ($action):
-        case 'showLoginForm':
-          //Wyświetlenie formularza logowania
+        case 'showLoginForm': // Wyświetlenie formularza logowania
+          include 'templates/loginForm.php';
           break;
-        case 'showRegistrationForm':
-          //Wyświetlenie formularza wyszukiwania
-          break;
-        case 'showSearchForm':
-          //Wyświetlenie formularza rejestracyjnego
-          break;
-        case 'searchBook':
-          //Wyszukanie książki
+        case 'showRegistrationForm': // Wyświetlenie formularza wyszukiwania
+          $portal->showRegistrationForm();
           break;
         case 'showBookDetails':
           //Wyświetlenie szczegółowych informacji o książce
+          $portal->showBookDetails();
           break;
-        case 'showBasket':
-          //Wyświetlenie zawartości koszyka
-          break;
+          case 'showBasket': // Wyświetlenie zawartości koszyka
+            $portal->showBasket(); break;
+
+          case 'addToBasket': // Dodawanie książki do koszyka
+            switch ($portal->addToBasket()) {
+              case INVALID_ID:
+                case FORM_DATA_MISSING:
+                  $portal->setMessage('Błędny identyfikator książki.');
+                  break;
+                  case ACTION_OK: $portal->setMessage('Książka została dodana do koszyka.');
+                  break; default: $portal->setMessage('Błąd serwera.');
+                  break; }
+                  header('Location:index.php?action=showBasket');
+                  break;
+          case 'modifyBasket': // Modyfikacja zawartości koszyka
+            $portal->setMessage('Zawartość koszyka została uaktualniona');
+            $portal->modifyBasket();
+            header('Location:index.php?action=showBasket');
+            break;
         case 'checkout':
-          //Wyświetlenie podsumowania zamówienia
+          $portal->checkout();
+          break;
+        case 'showSearchForm':
+          $portal->showSearchForm();
+          break;
+        case 'searchBook':
+          // Wyszukanie książki
+          $portal->showSearchForm();
+          $portal->showSearchResult();
           break;
         case 'showMain':
         default:
