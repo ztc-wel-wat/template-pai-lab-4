@@ -73,15 +73,50 @@ try {
           break;
         } header('Location:index.php?action=showRegistrationForm');
       break;
-    case 'addToBasket':
-      //Dodawanie książki do koszyka
-      break;
-    case 'modifyBasket':
-      //Modyfikacja zawartości koszyka
-      break;
-    case 'saveOrder':
-      //Zapis zamówienia w bazie danych
-      break;
+      case 'addToBasket': // Dodawanie książki do koszyka
+        switch ($portal->addToBasket()) {
+          case INVALID_ID:
+          case FORM_DATA_MISSING:
+            $portal->setMessage('Błędny identyfikator książki.');
+            break;
+          case ACTION_OK:
+            $portal->setMessage('Książka została dodana do koszyka.');
+            break;
+          default:
+            $portal->setMessage('Błąd serwera.');
+            break;
+        }
+        header('Location:index.php?action=showBasket');
+        break;
+      case 'modifyBasket': // Modyfikacja zawartości koszyka
+        $portal->setMessage('Zawartość koszyka została uaktualniona');
+        $portal->modifyBasket();
+        header('Location:index.php?action=showBasket');
+        break;
+      case 'saveOrder':
+        //Zapis zamówienia w bazie danych
+        $id = 0;
+        $basket = new Basket($portal->dbo);
+        switch ($basket->saveOrder($id)):
+          case EMPTY_BASKET:
+            $portal->setMessage('Koszyk jest pusty.');
+            header('Location:index.php?action=showMain');
+
+            return;
+          case LOGIN_REQUIRED:
+            $portal->setMessage('Najpierw proszę się zalogować');
+            break;
+          case ACTION_OK:
+            $portal->setMessage('Zamówienie zostało złożone. Identyfikator zamówienia: '.$id);
+            header('Location:index.php?action=showMain');
+
+            return;
+          case SERVER_ERROR:
+          default:
+            $portal->setMessage('Błąd servera.');
+        endswitch;
+        header('Location:index.php?action=checkout');
+        break;
     default:
       include 'templates/mainTemplate.php';
   }

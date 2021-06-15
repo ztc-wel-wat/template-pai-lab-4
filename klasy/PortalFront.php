@@ -176,4 +176,25 @@ class PortalFront extends Portal
         }
         include 'templates/bookDetails.php';
     }
+
+    // 4.8
+
+    public function addToBasket()
+    {
+        $basket = new Basket($this->dbo);
+
+        return $basket->add();
+    }
+
+    public function showBasket()
+    {
+        $basket = new Basket($this->dbo);
+        $basket->show('Zawartość koszyka', true);
+    }
+
+    public function modifyBasket()
+    {
+        $basket = new Basket($this->dbo);
+        $basket->modify();
+    }
 }

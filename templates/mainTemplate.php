@@ -49,9 +49,25 @@
           //Wyświetlenie szczegółowych informacji o książce
           $portal->showBookDetails();
           break;
-        case 'showBasket':
-          //Wyświetlenie zawartości koszyka
-          break;
+          case 'showBasket': // Wyświetlenie zawartości koszyka
+            $portal->showBasket(); break;
+
+          case 'addToBasket': // Dodawanie książki do koszyka
+            switch ($portal->addToBasket()) {
+              case INVALID_ID:
+                case FORM_DATA_MISSING:
+                  $portal->setMessage('Błędny identyfikator książki.');
+                  break;
+                  case ACTION_OK: $portal->setMessage('Książka została dodana do koszyka.');
+                  break; default: $portal->setMessage('Błąd serwera.');
+                  break; }
+                  header('Location:index.php?action=showBasket');
+                  break;
+          case 'modifyBasket': // Modyfikacja zawartości koszyka
+            $portal->setMessage('Zawartość koszyka została uaktualniona');
+            $portal->modifyBasket();
+            header('Location:index.php?action=showBasket');
+            break;
         case 'checkout':
           //Wyświetlenie podsumowania zamówienia
           break;
