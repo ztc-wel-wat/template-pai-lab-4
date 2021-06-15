@@ -17,12 +17,36 @@ try {
     $komunikat = 'Wprowadź nazwę i hasło użytkownika';
   }
 
+  if ($action == 'showLoginForm' && $portal->zalogowany) { 
+    $portal->setMessage("Najpierw proszę się wylogować"); 
+    header("location:index.php?action=showMain"); 
+    return; 
+  }
+
   switch ($action) {
     case 'login':
       //Obsługa logowania
+      switch ($portal->login()) { 
+        case ACTION_OK: $portal->setMessage("Zalogowanie prawidłowe"); 
+        header("Location:index.php?action=showMain"); 
+        return; 
+      case NO_LOGIN_REQUIRED: 
+        $portal->setMessage("Najpierw proszę się wylogować"); 
+        header("Location:index.php?action=showMain"); 
+        return; 
+      case ACTION_FAILED: 
+      case FORM_DATA_MISSING: 
+        $portal->setMessage("Błędna nazwa lub hasło użytkownika"); 
+        break; 
+      default: 
+        $portal->setMessage("Błąd serwera - zalogowanie nie jest obecnie możliwe"); 
+      } 
+      header("Location:index.php?action=showLoginForm");
       break;
     case 'logout':
       //Obsługa wylogowania
+      $portal->logout();
+      header("Location:index.php?action=showMain");
       break;
     case 'registerUser':
       //Obsługa rejestracji użytkownika
