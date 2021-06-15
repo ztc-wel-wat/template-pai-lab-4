@@ -179,4 +179,13 @@ class PortalFront extends Portal
        $basket->modify();
      }
 
+     function checkout()
+     {
+       if (isset($_SESSION['zalogowany'])) {
+         $basket = new Basket($this->dbo);
+         $basket->show("podsumowanie zamówienia", false);
+       } else
+         include 'templates/orderNoLoginInfoDiv.php';
+     }
+
 }
