@@ -85,7 +85,14 @@ return ACTION_OK;
       }
       session_destroy();
   }
-  
+  function showRegistrationForm(){
+    $reg = new Registration($this->dbo);
+    return $reg->showRegistrationForm();
+    }
+    function registerUser(){
+    $reg = new Registration($this->dbo);
+    return $reg->registerUser();
+    }
   //Tutaj pozostałe metody klasy
 }
 ?>
