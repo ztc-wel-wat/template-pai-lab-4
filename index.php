@@ -23,6 +23,13 @@ try {
     return;
     }   
 
+  if (($action == 'showLoginForm' || $action == 'showRegistrationForm' || $action == 'registerUser')
+    && $portal->zalogowany) {
+      $portal->setMessage("Najpierw proszę się wylogować");
+      header("Location:index.php?action=showMain");
+      return;
+  }
+
   switch ($action) {
     case 'login':
       switch ($portal->login()) {
