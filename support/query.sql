@@ -414,3 +414,5 @@ ALTER TABLE Klienci CHANGE COLUMN `Nr mieszkania` `Nr_mieszkania` VARCHAR(5);
 
 ALTER TABLE Klienci CHANGE COLUMN `Miasto` `Miejscowosc` VARCHAR(60) NOT NULL;
 
+-- 4.3
+UPDATE klienci SET Email = "abc@abc.com", Haslo = "haslo123" WHERE Id = 1
