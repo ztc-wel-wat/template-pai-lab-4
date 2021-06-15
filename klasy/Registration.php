@@ -17,7 +17,8 @@ class Registration
 		$this->fields['nazwisko'] = new FormInput('nazwisko', 'Nazwisko');
 		$this->fields['ulica'] = new FormInput('ulica', 'Ulica');
 		$this->fields['nr_domu'] = new FormInput('nr_domu', 'Numer domu');
-		$this->fields['nr_mieszkania'] = new FormInput('nr_mieszkania', 'Numer mieszkania', '', 'text', false);
+		$this->fields['nr_mieszkania'] =
+			new FormInput('nr_mieszkania', 'Numer mieszkania', '', 'text', false);
 		$this->fields['miejscowosc'] = new FormInput('miejscowosc', 'Miejscowość');
 		$this->fields['kod'] = new FormInput('kod', 'Kod pocztowy');
 		$this->fields['kraj'] = new FormInput('kraj', 'Kraj');
@@ -25,7 +26,11 @@ class Registration
 
 	public function showRegistrationForm()
 	{
+		foreach ($this->fields as $name => $field)
+			$field->value = isset($_SESSION['formData'][$name]) ? $_SESSION['formData'][$name] : '';
 		$formData = $this->fields;
+		if (isset($_SESSION['formData']))
+			unset($_SESSION['formData']);
 		include 'templates/registrationForm.php';
 	}
 
@@ -48,16 +53,32 @@ class Registration
 			if ($fieldsFromForm[$name] == '' && $val->required)
 				$emptyFieldDetected = true;
 		}
+
 		// Sprawdzenie, czy wykryto puste pola
-		if ($emptyFieldDetected == true)
+		if ($emptyFieldDetected == true) {
+			unset($fieldsFromForm['haslo']);
+			unset($fieldsFromForm['haslo2']);
+			$_SESSION['formData'] = $fieldsFromForm;
 			return FORM_DATA_MISSING;
+		}
+
 		// Sprawdzenie, czy podany e-mail jest już w bazie
 		$query = "SELECT COUNT(*) FROM klienci WHERE Email=" . $fieldsFromForm['email'] . "'";
-		if ($this->dbo->getQuerySingleResult($query) > 0)
+		if ($this->dbo->getQuerySingleResult($query) > 0) {
+			unset($fieldsFromForm['haslo']);
+			unset($fieldsFromForm['haslo2']);
+			$_SESSION['formData'] = $fieldsFromForm;
 			return USER_NAME_ALREADY_EXISTS;
+		}
+
 		// Sprawdzenie zgodności hasła z obu pól
-		if ($fieldsFromForm['haslo'] != $fieldsFromForm['haslo2'])
+		if ($fieldsFromForm['haslo'] != $fieldsFromForm['haslo2']) {
+			unset($fieldsFromForm['haslo']);
+			unset($fieldsFromForm['haslo2']);
+			$_SESSION['formData'] = $fieldsFromForm;
 			return PASSWORDS_DO_NOT_MATCH;
+		}
+
 		unset($fieldsFromForm['haslo2']);
 		unset($this->fields['haslo2']);
 		// Przygotowanie ciągów nazw pól i wartości pól dla zapytania SQL
