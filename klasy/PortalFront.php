@@ -100,7 +100,7 @@ class PortalFront extends Portal {
       // Określenie warunku dla tytułu
       if (isset($_GET['tytul']) && $_GET['tytul'] != '') {
       // Tu lub po przefiltrowaniu dodatkowa weryfikacja poprawności parametru
-      $autor = filter_input(INPUT_GET, 'tytul', FILTER_SANITIZE_SPECIAL_CHARS);
+      $tytul = filter_input(INPUT_GET, 'tytul', FILTER_SANITIZE_SPECIAL_CHARS);
       $cond2 = " AND k.`Tytul` LIKE '%" . $tytul . "%' ";
       } else {
       $cond2 = '';
@@ -121,6 +121,28 @@ class PortalFront extends Portal {
       // Wyświetlenie rezultatów wyszukiwania
       include 'templates/searchResults.php';
      }
-     
+     function showBookDetails() {
+      // Sprawdzenie poprawności identyfikatora książki (parametr id)
+      if (!isset($_GET['id']) || ($id = intval($_GET['id'])) < 1) {
+      $komunikat = 'Brak książki o podanym identyfikatorze.';
+      } else { // Formowanie zapytania
+      $query = 'SELECT `Tytul`, `ISBN`, `Rok wydania` AS Rok, `Opis`, `Cena`,'
+      . 'w.`Nazwa` AS `Wydawnictwo`, GROUP_CONCAT(a.`Nazwa`) AS Autor,'
+      . 'k.`Id` AS `Id` FROM Ksiazki k '
+      . 'JOIN KsiazkiAutorzy ka ON (k.`Id`=ka.`KsiazkaId` AND k.id=' . $id . ')'
+      . 'JOIN Autorzy a ON (a.`Id` = ka.`AutorId`) '
+      . 'JOIN Wydawnictwa w ON (w.`Id`=k.`WydawnictwoId`) GROUP BY k.`Id`';
+      // Umieszczenie wyników zapytania w tabeli
+      if ($result = $this->dbo->query($query)) {
+      if ($row = $result->fetch_assoc())
+      $komunikat = false;
+      else
+      $komunikat = 'Brak książki o podanym identyfikatorze.';
+      } else {
+      $komunikat = 'Błąd serwera. Dane szczegółowe nie są dostępne.';
+      }
+      }
+      include 'templates/bookDetails.php';
+     }
  }
  ?>
