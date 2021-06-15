@@ -39,18 +39,24 @@
       switch ($action):
         case 'showLoginForm':
           //Wyświetlenie formularza logowania
+          include('templates/loginForm.php'); 
           break;
         case 'showRegistrationForm':
           //Wyświetlenie formularza wyszukiwania
+          $portal->showRegistrationForm();
           break;
         case 'showSearchForm':
-          //Wyświetlenie formularza rejestracyjnego
+            //Wyświetlenie formularza rejestracyjnego
+            $portal->showSearchForm();
           break;
         case 'searchBook':
           //Wyszukanie książki
+          $portal->showSearchForm();
+          $portal->showSearchResults();
           break;
         case 'showBookDetails':
           //Wyświetlenie szczegółowych informacji o książce
+          $portal->showBookDetails();
           break;
         case 'showBasket':
           //Wyświetlenie zawartości koszyka
