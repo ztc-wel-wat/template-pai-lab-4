@@ -94,7 +94,25 @@ try {
 			header("Location:index.php?action=showBasket");
       break;
     case 'saveOrder':
-      //Zapis zamówienia w bazie danych
+      $id = 0;
+      $basket = new Basket($portal->dbo);
+      switch ($basket->saveOrder($id)):
+        case EMPTY_BASKET:
+          $portal->setMessage('Koszyk jest pusty.');
+          header("Location:index.php?action=showMain");
+          return;
+        case LOGIN_REQUIRED:
+          $portal->setMessage('Najpierw proszę się zalogować');
+          break;
+        case ACTION_OK:
+          $portal->setMessage('Zamówienie zostało złożone. Identyfikator zamówienia: ' . $id);
+          header("Location:index.php?action=showMain");
+          return;
+        case SERVER_ERROR:
+        default:
+          $portal->setMessage('Błąd servera.');
+      endswitch;
+      header("Location:index.php?action=checkout");
       break;
     default:
       include 'templates/mainTemplate.php';

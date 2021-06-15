@@ -57,7 +57,7 @@
           $portal->showBasket();
           break;
         case 'checkout':
-          //Wyświetlenie podsumowania zamówienia
+          $portal->checkout();
           break;
         case 'showMain':
         default:
