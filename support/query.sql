@@ -415,3 +415,6 @@ ALTER TABLE Klienci CHANGE COLUMN `Nr mieszkania` `Nr_mieszkania` VARCHAR(5);
 ALTER TABLE Klienci CHANGE COLUMN `Miasto` `Miejscowosc` VARCHAR(60) NOT NULL;
 
 UPDATE klienci SET Email = "jkowalski@wat.edu.pl", Haslo = "Test1234" WHERE Id = 1
+
+ALTER TABLE `klienci` CHANGE `Haslo` `Haslo` VARCHAR(60) NOT NULL;
+ALTER TABLE `klienci` ADD `Salt` VARCHAR(32) NOT NULL AFTER `Haslo`

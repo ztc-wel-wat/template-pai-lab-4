@@ -53,7 +53,7 @@ class PortalFront extends Portal
     $email = $this->dbo->real_escape_string($user);
     $pass = $this->dbo->real_escape_string($pass);
     // Wykonanie zapytania sprawdzającego poprawność danych
-    $query = "SELECT `Id`, `Imie`, `Nazwisko`, `Haslo` FROM klienci WHERE `Email`='$email'";
+    $query = "SELECT `Id`, `Imie`, `Nazwisko`, `Haslo`, 'Salt' FROM klienci WHERE `Email`='$email'";
     if (!$result = $this->dbo->query($query)) {
       $this->setMessage("'Wystąpił błąd: nieprawidłowe zapytanie...");
       return ACTION_FAILED;
@@ -65,7 +65,15 @@ class PortalFront extends Portal
     } else {
       $row = $result->fetch_row(); // Zmiana rekordu do tablicy
       $pass_db = $row[3]; // Odczytanie hasła zapisanego w DB
-      if ($pass != $pass_db) {
+      $salt_pass_db = $row[4]; // Odczytanie hasła zapisanego w DB
+      $options = [
+        'salt' => $salt_pass_db,
+        'cost' => 12
+      ];
+      $passToVeryfi = password_hash( $pass, PASSWORD_DEFAULT, $options);
+
+      $valid = password_verify($pass_db, $passToVeryfi);
+      if ($valid) {
         $this->setMessage("Wystąpił błąd: podano niepoprawne hasło");
         return ACTION_FAILED;
       } else {
