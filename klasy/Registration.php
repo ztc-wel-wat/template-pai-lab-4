@@ -21,15 +21,19 @@ class Registration{
     $this->fields['kraj'] = new FormInput('kraj', 'Kraj');
    }
  public function showRegistrationForm() {
-    $formData = $this->fields;
-    include 'templates/RegistrationForm.php';
+    foreach ($this->fields as $name => $field)
+			$field->value = isset($_SESSION['formData'][$name]) ? $_SESSION['formData'][$name] : '';
+		$formData = $this->fields;
+		if (isset($_SESSION['formData']))
+			unset($_SESSION['formData']);
+		include 'templates/registrationForm.php';
    }
    
    public function registerUser() {
-    // Sprawdzenie czy wszystkie pola ustawione
-    foreach ($this->fields as $name => $val) {
-    if (!isset($_POST[$name]))
-    return FORM_DATA_MISSING;
+   // Sprawdzenie czy wszystkie pola ustawione
+		foreach ($this->fields as $name => $val) {
+		if (!isset($_POST[$name]))
+		return FORM_DATA_MISSING;
     }
     // Odczyt i przefiltrowanie danych z formularza
     $fieldsFromForm = array();
@@ -46,15 +50,19 @@ class Registration{
     // Sprawdzenie, czy wykryto puste pola
     if ($emptyFieldDetected == true)
     return FORM_DATA_MISSING;
-    // Sprawdzenie, czy podany e-mail jest już w bazie
-    $query = "SELECT COUNT(*) FROM Klienci WHERE Email=" . $fieldsFromForm['email'] . "'";
-    if ($this->dbo->getQuerySingleResult($query) > 0)
-    return USER_NAME_ALREADY_EXISTS;
+    $query = "SELECT COUNT(*) FROM klienci WHERE Email=" . $fieldsFromForm['email'] . "'";
+		if ($this->dbo->getQuerySingleResult($query) > 0) {
+		unset($fieldsFromForm['haslo']);
+		unset($fieldsFromForm['haslo2']);
+		$_SESSION['formData'] = $fieldsFromForm;
+		return USER_NAME_ALREADY_EXISTS;
     // Sprawdzenie zgodności hasła z obu pól
-    if ($fieldsFromForm['haslo'] != $fieldsFromForm['haslo2'])
-    return PASSWORDS_DO_NOT_MATCH;
-    unset($fieldsFromForm['haslo2']);
-    unset($this->fields['haslo2']);
+		if ($fieldsFromForm['haslo'] != $fieldsFromForm['haslo2']) {
+			unset($fieldsFromForm['haslo']);
+			unset($fieldsFromForm['haslo2']);
+			$_SESSION['formData'] = $fieldsFromForm;
+			return PASSWORDS_DO_NOT_MATCH;
+        }
     // Przygotowanie ciągów nazw pól i wartości pól dla zapytania SQL
     $fieldsName = '`' . implode('`,`', array_keys($this->fields)) . '`';
     $fieldsVals = '\'' . implode('\',\'', $fieldsFromForm) . '\'';
