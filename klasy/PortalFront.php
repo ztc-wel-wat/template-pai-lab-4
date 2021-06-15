@@ -98,5 +98,19 @@ class PortalFront extends Portal
         session_destroy();
     }
 
-    //Tutaj
+    //4.4
+
+    public function showRegistrationForm()
+    {
+        $reg = new Registration($this->dbo);
+
+        return $reg->showRegistrationForm();
+    }
+
+    public function registerUser()
+    {
+        $reg = new Registration($this->dbo);
+
+        return $reg->registerUser();
+    }
 }
