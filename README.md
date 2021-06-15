@@ -12,3 +12,5 @@ Imię i nazwisko studenta:   Przemysław Policht
 Numer albumu:               72011 
 Grupa studencka:            WEL18ET1S1  
 Data realizacji zajęć:      16.06.2021 r.  
+
+Koniec Zajęć
