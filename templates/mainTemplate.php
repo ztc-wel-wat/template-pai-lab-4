@@ -45,12 +45,15 @@
             $portal->showRegistrationForm();
           break;
          
-        case 'showSearchForm':
-          //Wyświetlenie formularza rejestracyjnego
-          break;
-        case 'searchBook':
-          //Wyszukanie książki
-          break;
+          case 'showSearchForm': // Wyświetlenie formularza rejestracyjnego
+            $portal->showSearchForm();
+            break;
+           
+            case 'searchBook': // Wyszukanie książki
+              $portal->showSearchForm();
+              $portal->showSearchResult();
+              break;
+             
         case 'showBookDetails':
           //Wyświetlenie szczegółowych informacji o książce
           break;
