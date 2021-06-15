@@ -42,7 +42,7 @@
           include('templates/loginForm.php');
           break;
         case 'showRegistrationForm':
-          //Wyświetlenie formularza wyszukiwania
+          $portal->showRegistrationForm();
           break;
         case 'showSearchForm':
           //Wyświetlenie formularza rejestracyjnego
