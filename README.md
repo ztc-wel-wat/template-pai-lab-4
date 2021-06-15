@@ -12,3 +12,4 @@ Imię i nazwisko studenta:   Karolina Terpiłowska
 Numer albumu:               72032  
 Grupa studencka:            WEL18ET1S1  
 Data realizacji zajęć:      15.06.2021 r.  
+
