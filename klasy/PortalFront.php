@@ -53,7 +53,7 @@ class PortalFront extends Portal {
       $email = $this->dbo->real_escape_string($user);
       $pass = $this->dbo->real_escape_string($pass);
       // Wykonanie zapytania sprawdzającego poprawność danych
-      $query = "SELECT `Id`, `Imie`, `Nazwisko`, `Haslo` FROM Kliecni WHERE `Email`='$email'";
+      $query = "SELECT `Id`, `Imie`, `Nazwisko`, `Haslo` FROM klienci WHERE `Email`='$email'";
       if (!$result = $this->dbo->query($query)) {
         $this->setMessage("'Wystąpił błąd: nieprawidłowe zapytanie...");
       return ACTION_FAILED;
@@ -85,6 +85,15 @@ class PortalFront extends Portal {
     }
     session_destroy();
   }
+  function showRegistrationForm(){
+    $reg = new Registration($this->dbo);
+    return $reg->showRegistrationForm();
+   }
+   function registerUser(){
+    $reg = new Registration($this->dbo);
+    return $reg->registerUser();
+   }
+   
   
   //Tutaj pozostałe metody klasy
 }
