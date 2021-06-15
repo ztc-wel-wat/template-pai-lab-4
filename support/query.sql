@@ -415,3 +415,4 @@ ALTER TABLE Klienci CHANGE COLUMN `Miasto` `Miejscowosc` VARCHAR(60) NOT NULL;
 SELECT `Id`, `Imie`, `Nazwisko`, `Haslo` FROM Kliecni WHERE `Email`='$email'
 
 UPDATE klienci SET Email = "jankowalski@wat.edu.pl", Haslo = "haslo1234" WHERE Id = 1
+SELECT COUNT(*) FROM Klienci WHERE Email="adres";

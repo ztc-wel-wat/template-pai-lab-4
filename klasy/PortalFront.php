@@ -86,7 +86,14 @@ class PortalFront extends Portal
     } 
     session_destroy();
   }
-  
+  function showRegistrationForm(){ 
+    $reg = new Registration($this->dbo); 
+    return $reg->showRegistrationForm();
+   } 
+   function registerUser(){
+      $reg = new Registration($this->dbo);
+       return $reg->registerUser(); 
+      }
   //Tutaj pozostałe metody klasy
 }
 ?>
