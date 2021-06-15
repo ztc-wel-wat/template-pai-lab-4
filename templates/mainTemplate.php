@@ -42,10 +42,11 @@
           include('templates/loginForm.php'); 
           break;
         case 'showRegistrationForm':
-          //Wyświetlenie formularza wyszukiwania
+          // Wyświetlenie formularza rejestracyjne 
+          $portal->showRegistrationForm();
           break;
         case 'showSearchForm':
-          //Wyświetlenie formularza rejestracyjnego
+          //Wyświetlenie formularza gowyszukiwania 
           break;
         case 'searchBook':
           //Wyszukanie książki

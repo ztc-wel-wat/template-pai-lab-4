@@ -50,6 +50,29 @@ try {
       break;
     case 'registerUser':
       //Obsługa rejestracji użytkownika
+      switch ($portal->registerUser()) { 
+        case ACTION_OK: 
+          $portal->setMessage("Rejestracja prawidłowa. Możesz się teraz zalogować."); 
+          header("Location:index.php?action=showLoginForm"); 
+          return; 
+        case FORM_DATA_MISSING: 
+          $portal->setMessage("Proszę wypełnić wszystkie pola formularza!"); 
+          break; 
+        case PASSWORDS_DO_NOT_MATCH: 
+          $portal->setMessage("'Hasło musi być takie samo w obu polach!"); 
+          break; 
+        case USER_NAME_ALREADY_EXISTS: 
+          $portal->setMessage("Podany adres e-email jest już zarejestrowany!"); 
+          break; 
+        case ACTION_FAILED: 
+          $portal->setMessage("Obecnie rejestracja nie jest możliwa."); 
+          break; 
+        case SERVER_ERROR: 
+        default: 
+          $portal->setMessage("Błąd serwera!"); 
+          break; 
+        } 
+        header("Location:index.php?action=showRegistrationForm");
       break;
     case 'addToBasket':
       //Dodawanie książki do koszyka
