@@ -3,21 +3,21 @@
     <?php if ($komunikat) { ?>
         <p class="komunikat"><?= $komunikat ?></p>
     <?php } else { ?>
-        <table>
+        <table class="table">
             <tr>
-                <th>Tytuł</th>
-                <th>Autor</th>
-                <th>ISBN</th>
-                <th>Wydawnictwo</th>
-                <th>Cena</th>
-                <th>Koszyk</th>
+                <th scope="col">Tytuł</th>
+                <th scope="col">Autor</th>
+                <th scope="col">ISBN</th>
+                <th scope="col">Wydawnictwo</th>
+                <th scope="col">Cena</th>
+                <th scope="col">Koszyk</th>
             </tr>
             <!-- Pętla odczytująca wyniki -->
             <?php while ($row = $result->fetch_row()) { ?>
-                <tr>
+                <tr scope="row">
                     <?php $count = count($row); ?>
                     <!--Komórka z tytułem -->
-                    <td>
+                    <td >
                         <a href="index.php?action=showBookDetails&amp;id=<?php echo $row[$count - 1]; ?>">
                             <?php echo $row[0]; ?>
                         </a>

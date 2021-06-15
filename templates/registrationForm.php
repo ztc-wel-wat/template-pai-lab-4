@@ -4,16 +4,14 @@
     <form name="regForm" action="index.php?action=registerUser" method="POST">
         <table>
             <?php foreach ($formData as $input) { ?>
-                <tr>
-                    <td class="col1st"><?php echo $input->description; ?></td>
-                    <td class="col2ns"><?php echo $input->getInputHTML(); ?></td>
-                </tr>
+                <div class="mb-3">
+                    <label class="form-label"><?php echo $input->description; ?></label>
+                    <?php echo $input->getInputHTML(); ?>
+                </div>
             <?php } ?>
-            <tr>
-                <td colspan="2" class="colmerged">
-                    <input type="submit" value="Rejestracja">
-                </td>
-            </tr>
-        </table>
+            <button type="submit" class="btn btn-primary">Rejestracja</button>
     </form>
 </div>
+
+<form>
+  
