@@ -52,14 +52,14 @@
         case 'searchBook':
           //Wyszukanie książki
           $portal->showSearchForm();
-          $portal->showSearchResult();
+          $portal->showSearchResults();
           break;
         case 'showBookDetails':
           //Wyświetlenie szczegółowych informacji o książce
+          $portal->showBookDetails();
           break;
         case 'showBasket':
           //Wyświetlenie zawartości koszyka
-          $portal->showBookDetails();
           break;
         case 'checkout':
           //Wyświetlenie podsumowania zamówienia

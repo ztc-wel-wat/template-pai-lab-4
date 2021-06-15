@@ -5,7 +5,7 @@ class MyDB extends mysqli
   {
     //Wykonanie zapytania.
     if(!$result = $this->query($query)){
-      //echo 'Wystąpił błąd (getQuerySingleResult): nieprawidłowe zapytanie...';
+      //echo 'Wystąpił błąd (getQuerySingleResults): nieprawidłowe zapytanie...';
       return false;
     }
     if($row = $result->fetch_row()){
@@ -18,11 +18,11 @@ class MyDB extends mysqli
     }
   }
   
-  function getQueryResultAsTableRows($query, $colNames = false, $colNamesAsTh = true)
+  function getQueryResultsAsTableRows($query, $colNames = false, $colNamesAsTh = true)
   {
     //Odrzucone zapytanie
-    if(!$result = $this->query($query)) return false;
-    if(!$columns = $result->fetch_fields()) return false;
+    if(!$results = $this->query($query)) return false;
+    if(!$columns = $results->fetch_fields()) return false;
     
     //Zmienna przechowująca wynik działania metody.
     $str = '';
@@ -38,7 +38,7 @@ class MyDB extends mysqli
     }
     
     //Uzyskanie wyników zapytania.
-    while($row = $result->fetch_row()){
+    while($row = $results->fetch_row()){
       $str .= '<tr>';
       foreach($row as $val){
         $str .= "<td>$val</td>";

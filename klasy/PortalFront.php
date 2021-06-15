@@ -132,7 +132,7 @@ class PortalFront extends Portal
 		elseif ($result->num_rows < 1)
 			$komunikat = 'Brak książek spełniających podane kryteria.';
 		// Wyświetlenie rezultatów wyszukiwania
-		include 'templates/searchResult.php';
+		include 'templates/searchResults.php';
 	}
   function showBookDetails()
 	{
