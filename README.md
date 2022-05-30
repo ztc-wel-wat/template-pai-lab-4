@@ -1,4 +1,4 @@
-# Niedopasowni
+# bookworm.com
 
 ## Parametry projektu
 
@@ -10,5 +10,5 @@ Wersja: v1.0.0
 
 Imię i nazwisko studenta:   Imię Nazwisko  
 Numer albumu:               00000  
-Grupa studencka:            WEL18Ex1S1  
-Data realizacji zajęć:      08.06.2021 r.  
+Grupa studencka:            WEL19Ex1S1  
+Data realizacji zajęć:      09.05.2022 r.  
