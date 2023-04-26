@@ -1,12 +1,10 @@
 <?php
 class User {
     public $id;
-    public $firstName;
-    public $lastName;
+    public $nazwa;
     
-    function __construct($id, $firstName, $lastName) {
+    function __construct($id, $nazwa) {
         $this->id = $id;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
+        $this->nazwa = $nazwa;
     }    
 }
