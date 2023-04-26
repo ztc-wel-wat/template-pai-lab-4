@@ -11,17 +11,25 @@ class PortalFront extends Portal
   
   function getActualUser()
   {
-    //Treść meotdy getActualUser
+    if (isset($_SESSION['zalogowany']))
+      return $_SESSION['zalogowany'];
+    else
+      return null;
   }
-  
+
   function setMessage($komunikat)
   {
-    //Treść meotdy setMessage
+    $_SESSION['komunikat'] = $komunikat;
   }
-  
+
   function getMessage()
   {
-    //Treść meotdy getMessage
+    if (isset($_SESSION['komunikat'])) {
+      $komunikat = $_SESSION['komunikat'];
+      unset($_SESSION['komunikat']);
+      return $komunikat;
+    } else 
+      return null;
   }
 
   function login()
